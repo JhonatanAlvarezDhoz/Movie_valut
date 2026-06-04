@@ -1,6 +1,6 @@
-import 'package:movie_valut/core/errors/exceptions/exceptions.dart';
-import 'package:movie_valut/core/errors/failures/failure.dart';
-import 'package:movie_valut/core/errors/failures/failures.dart';
+import 'package:movie_vault/core/errors/exceptions/exceptions.dart';
+import 'package:movie_vault/core/errors/failures/failure.dart';
+import 'package:movie_vault/core/errors/failures/failures.dart';
 
 /// Maps Exceptions (infra layer) to Failures (domain/UI layer)
 class ExceptionMapper {

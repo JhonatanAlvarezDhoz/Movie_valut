@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:movie_valut/core/errors/exceptions/exceptions.dart';
-import 'package:movie_valut/core/logger/logger.dart';
-import 'package:movie_valut/core/network/api_client.dart';
+import 'package:movie_vault/core/errors/exceptions/exceptions.dart';
+import 'package:movie_vault/core/logger/logger.dart';
+import 'package:movie_vault/core/network/api_client.dart';
 
 class DioApiClient implements ApiClient {
   DioApiClient(this.dio, this.logger);

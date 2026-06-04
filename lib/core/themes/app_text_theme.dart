@@ -1,4 +1,4 @@
-import 'package:movie_valut/core/themes/app_colors.dart';
+import 'package:movie_vault/core/themes/app_colors.dart';
 import 'package:flutter/material.dart';
 
 /// Construye la jerarquía tipográfica base usando la paleta activa.

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:movie_valut/app/app.dart';
-import 'package:movie_valut/app/di/injector.dart';
+import 'package:movie_vault/app/app.dart';
+import 'package:movie_vault/app/di/injector.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

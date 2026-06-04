@@ -1,7 +1,7 @@
-import 'package:movie_valut/core/themes/app_colors.dart';
-import 'package:movie_valut/core/themes/app_text_theme.dart';
-import 'package:movie_valut/core/themes/dark_colors.dart';
-import 'package:movie_valut/core/themes/light_colors.dart';
+import 'package:movie_vault/core/themes/app_colors.dart';
+import 'package:movie_vault/core/themes/app_text_theme.dart';
+import 'package:movie_vault/core/themes/dark_colors.dart';
+import 'package:movie_vault/core/themes/light_colors.dart';
 import 'package:flutter/material.dart';
 
 /// Fábrica central de `ThemeData` para modo claro y oscuro.

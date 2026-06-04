@@ -1,4 +1,4 @@
-import 'package:movie_valut/core/constants/enums/log_levels.dart';
+import 'package:movie_vault/core/constants/enums/log_levels.dart';
 
 /// Represents a structured log event
 class LogEvent {

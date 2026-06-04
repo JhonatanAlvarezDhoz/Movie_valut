@@ -1,4 +1,4 @@
-import 'package:movie_valut/core/storage/contracts/secure_key_value_storage.dart';
+import 'package:movie_vault/core/storage/contracts/secure_key_value_storage.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 /// Adaptador concreto de FlutterSecureStorage.

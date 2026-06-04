@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:movie_valut/core/logger/logger.dart';
+import 'package:movie_vault/core/logger/logger.dart';
 
 /// Interceptor for logging HTTP traffic
 class LoggingInterceptor extends Interceptor {

@@ -1,5 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:movie_valut/core/storage/contracts/key_value_storage.dart';
+import 'package:movie_vault/core/storage/contracts/key_value_storage.dart';
 
 /// Implementación concreta de SharedPreferences.
 ///

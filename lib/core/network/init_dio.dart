@@ -1,11 +1,11 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:movie_valut/core/config/app_config.dart';
-import 'package:movie_valut/core/logger/log_interceptor.dart';
-import 'package:movie_valut/core/logger/logger.dart';
-import 'package:movie_valut/core/network/interceptors/network_headers_interceptor.dart';
-import 'package:movie_valut/core/network/interceptors/tmdb_auth_interceptor.dart';
+import 'package:movie_vault/core/config/app_config.dart';
+import 'package:movie_vault/core/logger/log_interceptor.dart';
+import 'package:movie_vault/core/logger/logger.dart';
+import 'package:movie_vault/core/network/interceptors/network_headers_interceptor.dart';
+import 'package:movie_vault/core/network/interceptors/tmdb_auth_interceptor.dart';
 
 Dio buildDio({required AppLogger logger}) {
   return Dio(

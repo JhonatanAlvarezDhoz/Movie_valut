@@ -1,4 +1,4 @@
-import 'package:movie_valut/core/errors/exceptions/exceptions.dart';
+import 'package:movie_vault/core/errors/exceptions/exceptions.dart';
 
 class ApiResponseEnvelope {
   final int? statusCode;

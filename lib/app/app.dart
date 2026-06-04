@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:movie_valut/app/bindings/initial_binding.dart';
-import 'package:movie_valut/core/responsive/app_viewport_preset.dart';
-import 'package:movie_valut/core/router/app_router.dart';
-import 'package:movie_valut/core/shared/widgets/app_viewport_preview.dart';
-import 'package:movie_valut/core/themes/app_theme.dart';
+import 'package:movie_vault/app/bindings/initial_binding.dart';
+import 'package:movie_vault/core/responsive/app_viewport_preset.dart';
+import 'package:movie_vault/core/router/app_router.dart';
+import 'package:movie_vault/core/shared/widgets/app_viewport_preview.dart';
+import 'package:movie_vault/core/themes/app_theme.dart';
 
 class App extends StatelessWidget {
   const App({super.key});

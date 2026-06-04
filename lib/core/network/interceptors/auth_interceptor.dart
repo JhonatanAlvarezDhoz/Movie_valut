@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:movie_valut/core/constants/keys/network_header_keys.dart';
-import 'package:movie_valut/core/logger/logger.dart';
-import 'package:movie_valut/core/storage/services/session_storage_service.dart';
+import 'package:movie_vault/core/constants/keys/network_header_keys.dart';
+import 'package:movie_vault/core/logger/logger.dart';
+import 'package:movie_vault/core/storage/services/session_storage_service.dart';
 
 /// Interceptor responsable de autenticación HTTP.
 ///

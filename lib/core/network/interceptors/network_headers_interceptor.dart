@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:movie_valut/core/constants/keys/network_header_keys.dart';
-import 'package:movie_valut/core/logger/logger.dart';
+import 'package:movie_vault/core/constants/keys/network_header_keys.dart';
+import 'package:movie_vault/core/logger/logger.dart';
 
 /// Interceptor de headers transversales.
 ///

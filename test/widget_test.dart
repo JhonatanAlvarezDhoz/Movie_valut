@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:movie_valut/core/config/app_config.dart';
-import 'package:movie_valut/core/database/cache_refresh_policy.dart';
+import 'package:movie_vault/core/config/app_config.dart';
+import 'package:movie_vault/core/database/cache_refresh_policy.dart';
 
 void main() {
   test('CacheRefreshPolicy refreshes after configured interval', () {

@@ -1,4 +1,4 @@
-import 'package:movie_valut/core/logger/logger.dart';
+import 'package:movie_vault/core/logger/logger.dart';
 
 /// Stub for crash reporting services (Firebase, Sentry, etc.)
 class CrashReporter {

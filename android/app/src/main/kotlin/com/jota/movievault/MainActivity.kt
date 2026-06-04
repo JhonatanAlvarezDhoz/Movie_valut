@@ -1,4 +1,4 @@
-package com.example.movie_valut
+package com.jota.movievault
 
 import io.flutter.embedding.android.FlutterActivity
 

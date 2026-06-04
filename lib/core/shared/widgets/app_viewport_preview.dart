@@ -1,6 +1,6 @@
-import 'package:movie_valut/core/responsive/app_viewport_preset.dart';
-import 'package:movie_valut/core/responsive/responsive_scope.dart';
-import 'package:movie_valut/core/themes/theme_extensions.dart';
+import 'package:movie_vault/core/responsive/app_viewport_preset.dart';
+import 'package:movie_vault/core/responsive/responsive_scope.dart';
+import 'package:movie_vault/core/themes/theme_extensions.dart';
 import 'package:flutter/material.dart';
 
 /// Wrapper global que permite usar el viewport real o un preset de preview.

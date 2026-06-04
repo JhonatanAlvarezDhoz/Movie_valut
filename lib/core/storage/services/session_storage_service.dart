@@ -1,5 +1,5 @@
-import 'package:movie_valut/core/constants/keys/storage_keys.dart';
-import 'package:movie_valut/core/storage/contracts/secure_key_value_storage.dart';
+import 'package:movie_vault/core/constants/keys/storage_keys.dart';
+import 'package:movie_vault/core/storage/contracts/secure_key_value_storage.dart';
 
 /// Servicio especializado para datos de sesión/autenticación.
 ///

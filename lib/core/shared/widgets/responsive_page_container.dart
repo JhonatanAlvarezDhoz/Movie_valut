@@ -1,4 +1,4 @@
-import 'package:movie_valut/core/extensions/context_responsive_extension.dart';
+import 'package:movie_vault/core/extensions/context_responsive_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

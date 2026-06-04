@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "204708347676",
+    "project_id": "movie-valut-test",
+    "storage_bucket": "movie-valut-test.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:204708347676:android:94aa57cf1991020c7704d9",
+        "android_client_info": {
+          "package_name": "com.jota.movievault"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyMm1G28RKenwQpJo5id6NN1r4Fks6Otk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

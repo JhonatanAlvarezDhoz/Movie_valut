@@ -1,4 +1,4 @@
-import 'package:movie_valut/core/errors/failures/failure.dart';
+import 'package:movie_vault/core/errors/failures/failure.dart';
 
 /// Represents connectivity-related issues
 class NetworkFailure extends Failure {

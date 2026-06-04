@@ -1,6 +1,6 @@
-import 'package:movie_valut/core/shared/navigation/app_navigation_destinations.dart';
-import 'package:movie_valut/core/shared/widgets/custom_text.dart';
-import 'package:movie_valut/core/themes/theme_extensions.dart';
+import 'package:movie_vault/core/shared/navigation/app_navigation_destinations.dart';
+import 'package:movie_vault/core/shared/widgets/custom_text.dart';
+import 'package:movie_vault/core/themes/theme_extensions.dart';
 import 'package:flutter/material.dart';
 
 /// Navigation rail customizado para tablet y layouts anchos.

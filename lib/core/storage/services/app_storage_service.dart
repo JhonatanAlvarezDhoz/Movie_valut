@@ -1,5 +1,5 @@
-import 'package:movie_valut/core/storage/contracts/key_value_storage.dart';
-import 'package:movie_valut/core/storage/contracts/object_serializer.dart';
+import 'package:movie_vault/core/storage/contracts/key_value_storage.dart';
+import 'package:movie_vault/core/storage/contracts/object_serializer.dart';
 
 /// Fachada de almacenamiento simple para configuraciones y objetos livianos.
 /// pero SOLO para storage simple, no para persistencia estructurada del dominio.

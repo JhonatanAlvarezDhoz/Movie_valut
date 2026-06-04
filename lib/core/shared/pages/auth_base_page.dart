@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_valut/core/shared/widgets/responsive_page_container.dart';
+import 'package:movie_vault/core/shared/widgets/responsive_page_container.dart';
 
 class AuthBasePage extends StatelessWidget {
   const AuthBasePage({super.key, required this.children});

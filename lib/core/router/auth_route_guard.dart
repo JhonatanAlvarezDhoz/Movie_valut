@@ -1,5 +1,5 @@
-import 'package:movie_valut/core/router/app_routes.dart';
-import 'package:movie_valut/core/storage/services/session_storage_service.dart';
+import 'package:movie_vault/core/router/app_routes.dart';
+import 'package:movie_vault/core/storage/services/session_storage_service.dart';
 
 /// Guard mínimo de sesión para navegación.
 ///

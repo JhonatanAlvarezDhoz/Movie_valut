@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_valut/core/responsive/responsive_scope.dart';
+import 'package:movie_vault/core/responsive/responsive_scope.dart';
 
 extension ContextResponsiveExtension on BuildContext {
   ResponsiveData get responsive => ResponsiveScope.of(this);

@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
-import 'package:movie_valut/core/router/app_routes.dart';
-import 'package:movie_valut/features/auth/presentation/pages/login_page.dart';
-import 'package:movie_valut/features/auth/presentation/pages/register_page.dart';
-import 'package:movie_valut/features/movies/presentation/pages/movie_detail_page.dart';
-import 'package:movie_valut/features/movies/presentation/pages/movies_home_page.dart';
+import 'package:movie_vault/core/router/app_routes.dart';
+import 'package:movie_vault/features/auth/presentation/pages/login_page.dart';
+import 'package:movie_vault/features/auth/presentation/pages/register_page.dart';
+import 'package:movie_vault/features/movies/presentation/pages/movie_detail_page.dart';
+import 'package:movie_vault/features/movies/presentation/pages/movies_home_page.dart';
 
 abstract final class AppRouter {
   static const initialRoute = AppRoutes.login;

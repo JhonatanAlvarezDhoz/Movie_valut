@@ -1,4 +1,4 @@
-import 'package:movie_valut/core/errors/exceptions/exception.dart';
+import 'package:movie_vault/core/errors/exceptions/exception.dart';
 
 /// Thrown when network request fails
 class NetworkException extends AppException {

@@ -1,4 +1,4 @@
-import 'package:movie_valut/core/config/app_config.dart';
+import 'package:movie_vault/core/config/app_config.dart';
 
 /// Política reutilizable para decidir cuándo refrescar datos cacheados.
 ///

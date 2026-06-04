@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:movie_valut/core/config/app_config.dart';
-import 'package:movie_valut/core/constants/keys/network_header_keys.dart';
+import 'package:movie_vault/core/config/app_config.dart';
+import 'package:movie_vault/core/constants/keys/network_header_keys.dart';
 
 /// Agrega la autenticación de TMDB sin filtrar detalles de red a las features.
 ///

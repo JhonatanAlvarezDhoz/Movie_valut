@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_valut/core/responsive/app_breakpoints.dart';
+import 'package:movie_vault/core/responsive/app_breakpoints.dart';
 
 /// Modelo inmutable con información responsive calculada para una app
 /// portrait-only.

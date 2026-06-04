@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:movie_valut/core/storage/contracts/object_serializer.dart';
+import 'package:movie_vault/core/storage/contracts/object_serializer.dart';
 
 /// Implementación de serialización usando JSON.
 class JsonSerializer implements ObjectSerializer {

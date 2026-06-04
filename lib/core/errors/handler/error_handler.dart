@@ -1,7 +1,7 @@
-import 'package:movie_valut/core/errors/failures/failure.dart';
-import 'package:movie_valut/core/errors/failures/failures.dart';
-import 'package:movie_valut/core/errors/mapper/mapper_error.dart';
-import 'package:movie_valut/core/logger/logger.dart';
+import 'package:movie_vault/core/errors/failures/failure.dart';
+import 'package:movie_vault/core/errors/failures/failures.dart';
+import 'package:movie_vault/core/errors/mapper/mapper_error.dart';
+import 'package:movie_vault/core/logger/logger.dart';
 
 /// Centralized error handler
 class ErrorHandler {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:movie_valut/core/router/app_routes.dart';
+import 'package:movie_vault/core/router/app_routes.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});

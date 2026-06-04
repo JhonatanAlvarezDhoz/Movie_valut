@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_valut/core/themes/app_colors.dart';
+import 'package:movie_vault/core/themes/app_colors.dart';
 
 /// Tokens oficiales para modo claro.
 /// Estilo: limpio, moderno y tipo catálogo de películas.

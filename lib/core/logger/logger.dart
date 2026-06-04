@@ -1,5 +1,5 @@
-import 'package:movie_valut/core/constants/enums/log_levels.dart';
-import 'package:movie_valut/core/logger/log_event.dart';
+import 'package:movie_vault/core/constants/enums/log_levels.dart';
+import 'package:movie_vault/core/logger/log_event.dart';
 import 'package:flutter/foundation.dart';
 
 /// Main logger class

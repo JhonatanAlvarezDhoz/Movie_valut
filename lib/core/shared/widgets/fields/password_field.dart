@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movie_valut/core/shared/widgets/custom_text_form_field.dart';
+import 'package:movie_vault/core/shared/widgets/custom_text_form_field.dart';
 
 /// Campo de contraseña reutilizable para formularios de cuenta.
 ///
