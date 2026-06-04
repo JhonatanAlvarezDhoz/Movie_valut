@@ -28,10 +28,22 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  auto_size_text: ^3.0.0
+  cached_network_image: ^3.4.1
   cupertino_icons: ^1.0.8
   dio: ^5.9.2
+  firebase_auth: ^6.5.2
+  firebase_core: ^4.10.0
   flutter:
     sdk: flutter
+  flutter_dotenv: ^6.0.1
+  flutter_screenutil: ^5.9.3
+  flutter_secure_storage: ^10.3.1
+  get: ^4.7.3
+  get_it: ^9.2.1
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  shared_preferences: ^2.5.5
 
 dev_dependencies:
 
