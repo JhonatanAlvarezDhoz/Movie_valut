@@ -44,9 +44,7 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-
-.env
-
-
 # Secrets
+.env
 google-services.json
+GoogleService-Info.plist
