@@ -85,7 +85,6 @@ class _MovieHeader extends StatelessWidget {
     final theme = Theme.of(context);
     final posterUrl = AppConfig.tmdbImageUrl(movie.posterPath);
     final heroTag = 'movie-poster-${movie.id}';
-    final categoryText = _categoryText(detail);
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,17 +124,14 @@ class _MovieHeader extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               _MetadataRow(movie: movie),
-              if (categoryText.isNotEmpty) ...[
+              if (detail.genres.isNotEmpty) ...[
                 const SizedBox(height: 12),
                 Wrap(
                   spacing: 8,
                   runSpacing: 8,
-                  children: [
-                    Chip(label: Text(categoryText)),
-                    ...detail.genres
-                        .take(2)
-                        .map((genre) => Chip(label: Text(genre))),
-                  ],
+                  children: detail.genres
+                      .map((genre) => _GenreChip(genre: genre))
+                      .toList(),
                 ),
               ],
             ],
@@ -144,13 +140,90 @@ class _MovieHeader extends StatelessWidget {
       ],
     );
   }
+}
 
-  String _categoryText(MovieDetail detail) {
-    if (detail.movie.categoryLabel.isNotEmpty) {
-      return detail.movie.categoryLabel;
+class _GenreChip extends StatelessWidget {
+  const _GenreChip({required this.genre});
+
+  final String genre;
+
+  @override
+  Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final color = _genreColor(genre);
+    final foreground = isDarkMode ? color.shade200 : color.shade700;
+    final background = isDarkMode
+        ? color.shade900.withValues(alpha: 0.55)
+        : color.shade50;
+
+    return Chip(
+      label: Text(genre),
+      backgroundColor: background,
+      side: BorderSide(color: color.shade300),
+      labelStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
+        color: foreground,
+        fontWeight: FontWeight.w700,
+      ),
+      avatar: Icon(Icons.local_offer_rounded, size: 16, color: foreground),
+    );
+  }
+
+  MaterialColor _genreColor(String genre) {
+    switch (genre.toLowerCase().trim()) {
+      case 'action':
+      case 'acción':
+        return Colors.red;
+      case 'adventure':
+      case 'aventura':
+        return Colors.orange;
+      case 'animation':
+      case 'animación':
+        return Colors.cyan;
+      case 'comedy':
+      case 'comedia':
+        return Colors.amber;
+      case 'crime':
+      case 'crimen':
+        return Colors.blueGrey;
+      case 'documentary':
+      case 'documental':
+        return Colors.teal;
+      case 'drama':
+        return Colors.indigo;
+      case 'family':
+      case 'familia':
+        return Colors.green;
+      case 'fantasy':
+      case 'fantasía':
+        return Colors.purple;
+      case 'history':
+      case 'historia':
+        return Colors.brown;
+      case 'horror':
+      case 'terror':
+        return Colors.deepPurple;
+      case 'music':
+      case 'música':
+        return Colors.pink;
+      case 'mystery':
+      case 'misterio':
+        return Colors.deepOrange;
+      case 'romance':
+        return Colors.pink;
+      case 'science fiction':
+      case 'ciencia ficción':
+        return Colors.lightBlue;
+      case 'thriller':
+        return Colors.lime;
+      case 'war':
+      case 'bélica':
+      case 'guerra':
+        return Colors.grey;
+      case 'western':
+        return Colors.brown;
+      default:
+        return Colors.blue;
     }
-
-    return detail.genres.isNotEmpty ? detail.genres.first : '';
   }
 }
 

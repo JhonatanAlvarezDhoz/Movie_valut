@@ -4,13 +4,86 @@ Aplicación Flutter para prueba técnica: autenticación con Firebase, consumo d
 
 ## Stack
 
-- Flutter 3.x+
+- Flutter stable 3.41.6
+- Dart 3.11.4
 - Firebase Authentication
 - TMDB API vía Dio
 - Hive / Hive Flutter para cache y sesión local
 - GetX para controladores, estado y navegación
 - GetIt como composition root/DI
 - cached_network_image mediante wrapper compartido
+
+## Manual de ejecución
+
+### 1. Verificar versión de Flutter
+
+La entrega fue preparada para ejecutarse con Flutter stable `3.41.6`:
+
+```sh
+flutter --version
+```
+
+La salida esperada debe indicar:
+
+```txt
+Flutter 3.41.6 • channel stable
+```
+
+### 2. Configurar variables de entorno
+
+Renombrá o copiá el archivo `.env.template` como `.env` en la raíz del proyecto:
+
+```sh
+cp .env.template .env
+```
+
+Luego completá el `.env` con las credenciales de TMDB proporcionadas en el correo donde se envía la prueba técnica:
+
+```env
+apiUrlTMDB=https://api.themoviedb.org/3
+accessTokenTMDB=TOKEN_PROPORCIONADO
+keyApiTMDB=API_KEY_PROPORCIONADA
+ImageBaseOriginalUrlTMDB=https://image.tmdb.org/t/p/original
+ImageBaseUpdateSizeUrlTMDB=https://image.tmdb.org/t/p/w500
+```
+
+> La app usa `accessTokenTMDB` como primera opción. Si no existe, usa `keyApiTMDB` como fallback.
+
+### 3. Agregar configuración de Firebase
+
+Los archivos de configuración de Firebase no están versionados. Serán enviados en un `.zip` adjunto en el correo de entrega de la prueba técnica.
+
+Copiá cada archivo en su ubicación correspondiente:
+
+```txt
+android/app/google-services.json
+ios/Runner/GoogleService-Info.plist
+lib/firebase_options.dart
+```
+
+Sin estos archivos, Firebase Authentication no podrá inicializarse correctamente.
+
+### 4. Instalar dependencias
+
+```sh
+flutter pub get
+```
+
+### 5. Ejecutar la app
+
+Con un emulador o dispositivo conectado:
+
+```sh
+flutter run
+```
+
+### 6. Validar antes de entregar
+
+```sh
+dart format lib test
+flutter analyze
+flutter test
+```
 
 ## Arquitectura
 
@@ -39,17 +112,15 @@ Reglas principales:
 
 ## Variables de entorno
 
-El archivo `.env` debe existir en la raíz y contener las claves de TMDB usadas por `AppConfig`:
+El archivo `.env` no se versiona. Usá `.env.template` como base y completá los valores reales entregados por correo. Las claves leídas por `AppConfig` son:
 
 ```env
-apiUrlTMDB=...
-accessTokenTMDB=...
-keyApiTMDB=...
-ImageBaseOriginalUrlTMDB=...
-ImageBaseUpdateSizeUrlTMDB=...
+apiUrlTMDB=
+accessTokenTMDB=
+keyApiTMDB=
+ImageBaseOriginalUrlTMDB=
+ImageBaseUpdateSizeUrlTMDB=
 ```
-
-> No subas tokens reales a repositorios públicos.
 
 ## Funcionalidad implementada
 

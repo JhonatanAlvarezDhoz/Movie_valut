@@ -62,8 +62,8 @@ class SessionStorageService {
   ///
   /// OJO: "sesión válida" acá significa "sesión recuperable para navegar".
   /// Si el access token venció pero todavía tenemos refresh token, dejamos
-  /// pasar la navegación para que `AuthInterceptor` renueve la sesión cuando
-  /// la próxima request protegida responda 401.
+  /// pasar la navegación para no destruir una sesión que todavía puede
+  /// recuperarse con Firebase/Auth en el siguiente chequeo explícito.
   ///
   /// Si limpiamos la sesión apenas vence el access token, destruimos también
   /// el refresh token y bloqueamos justamente el flujo que debería renovarlo.
