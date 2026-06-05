@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_vault/core/shared/widgets/custom_text_form_field.dart';
 
 /// Campo de contraseña reutilizable para formularios de cuenta.
@@ -44,9 +43,7 @@ class _PasswordFieldState extends State<PasswordField> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:
-          widget.padding ??
-          EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
+      padding: widget.padding ?? EdgeInsets.zero,
       child: CustomTextFormField(
         label: widget.label,
         hintText: widget.hintText,
