@@ -5,6 +5,7 @@ import 'package:movie_vault/features/movies/domain/entities/movie_category.dart'
 import 'package:movie_vault/features/movies/domain/entities/movie_page.dart';
 import 'package:movie_vault/features/movies/domain/repositories/movies_repository.dart';
 
+/// Loads one paginated movie category and exposes controlled [Result] output.
 class GetMoviesUseCase {
   const GetMoviesUseCase(this._repository);
 

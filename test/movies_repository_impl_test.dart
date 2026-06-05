@@ -59,6 +59,50 @@ void main() {
     expect(page.currentPage, 1);
     expect(page.totalPages, 4);
   });
+
+  test('fetches remote next page and appends it to local cache', () async {
+    await localDataSource.saveMovies(
+      MovieCategory.popular,
+      [_movie(id: 1)],
+      currentPage: 1,
+      totalPages: 3,
+    );
+
+    final repository = MoviesRepositoryImpl(
+      remoteDataSource: MoviesRemoteDataSource(
+        _SuccessfulApiClient(
+          response: {
+            'page': 2,
+            'total_pages': 3,
+            'results': [
+              {
+                'id': 2,
+                'title': 'Remote movie',
+                'overview': 'Remote overview',
+                'poster_path': '/poster.jpg',
+                'backdrop_path': '/backdrop.jpg',
+                'release_date': '2026-01-02',
+                'vote_average': 7.5,
+              },
+            ],
+          },
+        ),
+      ),
+      localDataSource: localDataSource,
+      cacheRefreshPolicy: const CacheRefreshPolicy(),
+    );
+
+    final remotePage = await repository.getMovies(
+      MovieCategory.popular,
+      page: 2,
+    );
+    final cache = await localDataSource.readMovies(MovieCategory.popular);
+
+    expect(remotePage.currentPage, 2);
+    expect(cache!.movies.map((movie) => movie.id), [1, 2]);
+    expect(cache.currentPage, 2);
+    expect(cache.totalPages, 3);
+  });
 }
 
 MovieModel _movie({required int id}) {
@@ -78,6 +122,28 @@ class _OfflineApiClient implements ApiClient {
   @override
   Future<dynamic> get(String path, {Map<String, dynamic>? query}) {
     throw NetworkException('Sin conexión.');
+  }
+
+  @override
+  Future<dynamic> patch(String path, {data}) => throw UnimplementedError();
+
+  @override
+  Future<dynamic> post(String path, {data}) => throw UnimplementedError();
+
+  @override
+  Future<dynamic> uploadImage(String path, String filePath) {
+    throw UnimplementedError();
+  }
+}
+
+class _SuccessfulApiClient implements ApiClient {
+  const _SuccessfulApiClient({required this.response});
+
+  final Map<String, dynamic> response;
+
+  @override
+  Future<dynamic> get(String path, {Map<String, dynamic>? query}) async {
+    return response;
   }
 
   @override

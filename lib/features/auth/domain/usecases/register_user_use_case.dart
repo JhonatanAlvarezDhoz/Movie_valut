@@ -4,6 +4,7 @@ import 'package:movie_vault/core/errors/result.dart';
 import 'package:movie_vault/features/auth/domain/entities/auth_session.dart';
 import 'package:movie_vault/features/auth/domain/repositories/auth_repository.dart';
 
+/// Registers a user remotely and exposes success/failure through [Result].
 class RegisterUserUseCase {
   const RegisterUserUseCase(this._repository);
 

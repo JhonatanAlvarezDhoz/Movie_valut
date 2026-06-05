@@ -5,6 +5,10 @@ import 'package:movie_vault/features/movies/data/models/movie_page_model.dart';
 import 'package:movie_vault/features/movies/domain/entities/movie.dart';
 import 'package:movie_vault/features/movies/domain/entities/movie_category.dart';
 
+/// TMDB remote data source for movie list and detail endpoints.
+///
+/// It depends on the project [ApiClient] abstraction, never on Dio directly,
+/// and converts raw JSON into data models before data reaches repositories.
 class MoviesRemoteDataSource {
   const MoviesRemoteDataSource(this._apiClient);
 

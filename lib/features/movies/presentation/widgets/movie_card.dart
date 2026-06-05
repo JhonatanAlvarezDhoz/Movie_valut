@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:movie_vault/core/config/app_config.dart';
 import 'package:movie_vault/core/router/app_routes.dart';
 import 'package:movie_vault/core/shared/widgets/images/cached_remote_image.dart';
+import 'package:movie_vault/core/themes/theme_extensions.dart';
 import 'package:movie_vault/features/movies/domain/entities/movie.dart';
 
 class MovieCard extends StatelessWidget {
@@ -12,7 +13,8 @@ class MovieCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final colors = context.colors;
+    final textTheme = Theme.of(context).textTheme;
     final posterUrl = AppConfig.tmdbImageUrl(movie.posterPath);
 
     final heroTag = 'movie-poster-${movie.id}';
@@ -50,22 +52,22 @@ class MovieCard extends StatelessWidget {
                         movie.title,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: theme.textTheme.titleMedium,
+                        style: textTheme.titleMedium,
                       ),
                       const SizedBox(height: 6),
                       Text(
                         movie.releaseDate.isEmpty
                             ? 'Sin fecha'
                             : movie.releaseDate,
-                        style: theme.textTheme.bodySmall,
+                        style: textTheme.bodySmall,
                       ),
                       const SizedBox(height: 8),
                       Row(
                         children: [
-                          const Icon(
+                          Icon(
                             Icons.star_rounded,
                             size: 18,
-                            color: Colors.amber,
+                            color: colors.rating,
                           ),
                           const SizedBox(width: 4),
                           Text(movie.voteAverage.toStringAsFixed(1)),
@@ -79,7 +81,7 @@ class MovieCard extends StatelessWidget {
                               : movie.overview,
                           maxLines: 3,
                           overflow: TextOverflow.ellipsis,
-                          style: theme.textTheme.bodyMedium,
+                          style: textTheme.bodyMedium,
                         ),
                       ),
                     ],

@@ -1,3 +1,4 @@
+/// Actor/person entry returned from TMDB credits for a movie detail.
 class CastMember {
   const CastMember({
     required this.id,

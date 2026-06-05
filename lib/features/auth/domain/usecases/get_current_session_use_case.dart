@@ -4,6 +4,7 @@ import 'package:movie_vault/core/errors/result.dart';
 import 'package:movie_vault/features/auth/domain/entities/auth_session.dart';
 import 'package:movie_vault/features/auth/domain/repositories/auth_repository.dart';
 
+/// Resolves the current user session for splash/startup routing.
 class GetCurrentSessionUseCase {
   const GetCurrentSessionUseCase(this._repository);
 

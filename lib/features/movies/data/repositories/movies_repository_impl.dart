@@ -9,6 +9,11 @@ import 'package:movie_vault/features/movies/domain/entities/movie_detail.dart';
 import 'package:movie_vault/features/movies/domain/entities/movie_page.dart';
 import 'package:movie_vault/features/movies/domain/repositories/movies_repository.dart';
 
+/// Coordinates TMDB remote reads with Hive cache/offline fallback.
+///
+/// The repository is the only movies layer that knows both data sources. It
+/// returns domain entities and lets use cases map controlled exceptions to
+/// failures.
 class MoviesRepositoryImpl implements MoviesRepository {
   const MoviesRepositoryImpl({
     required MoviesRemoteDataSource remoteDataSource,

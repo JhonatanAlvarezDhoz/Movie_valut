@@ -17,6 +17,10 @@ class MoviesCacheEntry {
   final int totalPages;
 }
 
+/// Hive-backed movie cache.
+///
+/// Stores one list per [MovieCategory] plus pagination metadata. Duplicates are
+/// removed by TMDB id before persisting, so pagination can safely append pages.
 class MoviesLocalDataSource {
   static const _boxName = 'movies_cache_box';
   static const _moviesPrefix = 'movies';

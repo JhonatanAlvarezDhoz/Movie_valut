@@ -3,6 +3,10 @@ import 'package:movie_vault/features/auth/data/datasources/hive_auth_local_data_
 import 'package:movie_vault/features/auth/domain/entities/auth_session.dart';
 import 'package:movie_vault/features/auth/domain/repositories/auth_repository.dart';
 
+/// Remote-first authentication repository.
+///
+/// Login/register always go to Firebase first. Hive is only updated after a
+/// successful remote session, which protects auth from stale local state.
 class AuthRepositoryImpl implements AuthRepository {
   const AuthRepositoryImpl({
     required FirebaseAuthRemoteDataSource remoteDataSource,

@@ -1,3 +1,7 @@
+/// Movie summary used by the home list and as detail fallback data.
+///
+/// This entity is intentionally framework-free: no Flutter, Dio, Hive or TMDB
+/// response types are allowed in domain.
 class Movie {
   const Movie({
     required this.id,

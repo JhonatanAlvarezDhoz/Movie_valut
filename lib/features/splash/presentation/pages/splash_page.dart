@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_vault/core/shared/widgets/loaders/app_loader.dart';
+import 'package:movie_vault/core/themes/theme_extensions.dart';
 import 'package:movie_vault/features/auth/presentation/controllers/auth_controller.dart';
 
 class SplashPage extends StatefulWidget {
@@ -23,16 +24,25 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    final colors = context.colors;
+    final textTheme = Theme.of(context).textTheme;
+
+    return Scaffold(
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(Icons.movie_creation_outlined, size: 64),
-            SizedBox(height: 16),
-            Text('Movie Vault'),
-            SizedBox(height: 24),
-            AppLoader(),
+            Icon(
+              Icons.movie_creation_outlined,
+              size: 64,
+              color: colors.primary,
+            ),
+            const SizedBox(height: 16),
+            Text('Movie Vault', style: textTheme.headlineMedium),
+            const SizedBox(height: 8),
+            Text('Tu catálogo de películas', style: textTheme.bodyMedium),
+            const SizedBox(height: 24),
+            const AppLoader(),
           ],
         ),
       ),

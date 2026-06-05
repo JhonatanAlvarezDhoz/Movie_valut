@@ -5,6 +5,7 @@ import 'package:movie_vault/features/movies/domain/entities/movie.dart';
 import 'package:movie_vault/features/movies/domain/entities/movie_detail.dart';
 import 'package:movie_vault/features/movies/domain/repositories/movies_repository.dart';
 
+/// Loads detailed movie information and maps exceptions into [ResultFailure].
 class GetMovieDetailUseCase {
   const GetMovieDetailUseCase(this._repository);
 

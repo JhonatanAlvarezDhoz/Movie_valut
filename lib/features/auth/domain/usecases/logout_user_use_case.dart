@@ -3,6 +3,7 @@ import 'package:movie_vault/core/errors/mapper/mapper_error.dart';
 import 'package:movie_vault/core/errors/result.dart';
 import 'package:movie_vault/features/auth/domain/repositories/auth_repository.dart';
 
+/// Closes the current session and exposes controlled failure states.
 class LogoutUserUseCase {
   const LogoutUserUseCase(this._repository);
 

@@ -1,5 +1,9 @@
 import 'package:movie_vault/features/movies/domain/entities/movie.dart';
 
+/// Paginated movie result exposed to presentation.
+///
+/// Keeps TMDB pagination metadata out of widgets and controllers only depend
+/// on this domain shape.
 class MoviePage {
   const MoviePage({
     required this.movies,
