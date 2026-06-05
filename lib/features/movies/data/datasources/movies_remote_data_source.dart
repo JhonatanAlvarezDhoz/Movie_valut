@@ -1,5 +1,6 @@
 import 'package:movie_vault/core/errors/exceptions/exceptions.dart';
 import 'package:movie_vault/core/network/api_client.dart';
+import 'package:movie_vault/core/network/api_response_envelope.dart';
 import 'package:movie_vault/features/movies/data/models/movie_detail_model.dart';
 import 'package:movie_vault/features/movies/data/models/movie_page_model.dart';
 import 'package:movie_vault/features/movies/domain/entities/movie.dart';
@@ -27,12 +28,12 @@ class MoviesRemoteDataSource {
       throw ParsingException('TMDB devolvió una respuesta inesperada.');
     }
 
-    final results = response['results'];
-    if (results is! List) {
-      throw ParsingException('TMDB no devolvió una lista de películas.');
-    }
+    final envelope = ApiResponseEnvelope.fromJson(response);
 
-    return MoviePageModel.fromJson(response, categoryLabel: category.label);
+    return MoviePageModel.fromJson(
+      envelope.toJson(),
+      categoryLabel: category.label,
+    );
   }
 
   Future<MovieDetailModel> getMovieDetail(Movie movie) async {

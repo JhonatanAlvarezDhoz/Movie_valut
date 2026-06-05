@@ -2,14 +2,14 @@ import 'package:dio/dio.dart';
 import 'package:movie_vault/core/constants/keys/network_header_keys.dart';
 import 'package:movie_vault/core/logger/logger.dart';
 
-/// Interceptor de headers transversales.
+/// Applies cross-cutting request headers.
 ///
-/// No maneja ETags: para TMDB se usará una política de refresco cada 12 horas
-/// coordinada por el repository/local datasource de películas.
+/// This interceptor does not implement ETags. Movie freshness is handled by the
+/// movies repository/local datasource using the 12-hour cache policy.
 class NetworkHeadersInterceptor extends Interceptor {
-  final AppLogger _logger;
-
   const NetworkHeadersInterceptor(this._logger);
+
+  final AppLogger _logger;
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
@@ -18,6 +18,7 @@ class NetworkHeadersInterceptor extends Interceptor {
     handler.next(options);
   }
 
+  /// Adds JSON content type unless a request explicitly opts out or uses form data.
   void _applyDefaultContentType(RequestOptions options) {
     final shouldSkipDefaultJson =
         options.extra[NetworkRequestKeys.skipDefaultJsonContentType] == true;

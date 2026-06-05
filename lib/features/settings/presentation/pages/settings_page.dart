@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_vault/core/shared/widgets/button/app_button.dart';
 import 'package:movie_vault/core/themes/theme_controller.dart';
-import 'package:movie_vault/core/themes/theme_extensions.dart';
+import 'package:movie_vault/core/extensions/context_theme_extension.dart';
 import 'package:movie_vault/features/auth/presentation/controllers/auth_controller.dart';
 
 class SettingsPage extends StatelessWidget {

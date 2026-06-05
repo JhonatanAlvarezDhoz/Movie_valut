@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_vault/core/shared/widgets/custom_text.dart';
-import 'package:movie_vault/core/themes/theme_extensions.dart';
+import 'package:movie_vault/core/extensions/context_theme_extension.dart';
 
 /// Header reutilizable para páginas internas.
 ///
@@ -93,7 +93,7 @@ class ActionPageHeaderState extends State<ActionPageHeader>
         Expanded(
           child: CustomText(
             text: widget.title,
-            style: context.textTheme.titleMedium,
+            style: context.appTextTheme.titleMedium,
             textAlign: TextAlign.center,
             fontWeight: FontWeight.w800,
           ),

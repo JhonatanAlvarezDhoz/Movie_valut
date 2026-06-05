@@ -1,6 +1,6 @@
 import 'package:movie_vault/core/shared/navigation/app_navigation_destinations.dart';
 import 'package:movie_vault/core/shared/widgets/custom_text.dart';
-import 'package:movie_vault/core/themes/theme_extensions.dart';
+import 'package:movie_vault/core/extensions/context_theme_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -70,7 +70,7 @@ class CustomBottomNavBar extends StatelessWidget {
                         SizedBox(height: 6.h),
                         CustomText(
                           text: item.label,
-                          style: context.textTheme.bodySmall,
+                          style: context.appTextTheme.bodySmall,
                           color: isSelected ? colors.primary : colors.textMuted,
                           maxLines: 1,
                           textAlign: TextAlign.center,

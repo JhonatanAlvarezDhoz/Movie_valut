@@ -5,12 +5,17 @@ import 'package:movie_vault/core/errors/exceptions/exceptions.dart';
 import 'package:movie_vault/core/logger/logger.dart';
 import 'package:movie_vault/core/network/api_client.dart';
 
+/// Dio-backed implementation of [ApiClient].
+///
+/// This class is the transport boundary: it owns retries and maps Dio failures
+/// into controlled `AppException` types before errors can reach data sources.
 class DioApiClient implements ApiClient {
   DioApiClient(this.dio, this.logger);
 
   final Dio dio;
   final AppLogger logger;
 
+  /// Retries transient failures while letting client errors fail immediately.
   Future<Response<dynamic>> _retry(
     Future<Response<dynamic>> Function() request, {
     int retries = 3,
@@ -34,6 +39,7 @@ class DioApiClient implements ApiClient {
     throw ServerException('No fue posible completar la petición.');
   }
 
+  /// Converts raw Dio failures into the app's controlled exception taxonomy.
   Exception _mapDioException(DioException error) {
     final statusCode = error.response?.statusCode;
 

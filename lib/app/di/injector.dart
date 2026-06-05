@@ -34,8 +34,20 @@ import 'package:movie_vault/core/storage/services/session_storage_service.dart';
 import 'package:movie_vault/core/themes/theme_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// Global service locator used as the composition root.
 final serviceLocator = GetIt.instance;
 
+/// Builds the dependency graph from infrastructure to presentation.
+///
+/// Registration order matters:
+/// 1. core services and clients;
+/// 2. data sources;
+/// 3. repositories;
+/// 4. use cases;
+/// 5. GetX controllers.
+///
+/// Keeping this graph centralized prevents widgets from creating Firebase,
+/// Dio, Hive, storage or repository dependencies directly.
 Future<void> initDependencies() async {
   if (serviceLocator.isRegistered<AppLogger>()) {
     return;

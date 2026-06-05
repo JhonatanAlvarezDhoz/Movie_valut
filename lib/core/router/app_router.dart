@@ -8,9 +8,16 @@ import 'package:movie_vault/features/settings/presentation/pages/settings_page.d
 import 'package:movie_vault/features/splash/presentation/pages/splash_page.dart';
 import 'package:movie_vault/features/user/presentation/pages/account_page.dart';
 
+/// GetX route table for the application.
+///
+/// The router only declares navigation targets. Business decisions such as
+/// session checks stay in controllers/use cases and are triggered by pages like
+/// `SplashPage`.
 abstract final class AppRouter {
+  /// First route shown when the app starts.
   static const initialRoute = AppRoutes.splash;
 
+  /// All named pages registered in GetX.
   static final pages = <GetPage<dynamic>>[
     GetPage(name: AppRoutes.splash, page: () => const SplashPage()),
     GetPage(name: AppRoutes.login, page: () => const LoginPage()),

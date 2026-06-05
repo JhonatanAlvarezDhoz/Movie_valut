@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_vault/core/shared/widgets/custom_text.dart';
-import 'package:movie_vault/core/themes/theme_extensions.dart';
+import 'package:movie_vault/core/extensions/context_theme_extension.dart';
 
 /// Opción simple para dropdowns compartidos.
 ///
@@ -76,7 +76,7 @@ class DropdownField extends StatelessWidget {
             children: [
               CustomText(
                 text: label,
-                style: context.textTheme.bodyMedium,
+                style: context.appTextTheme.bodyMedium,
                 color: colors.textSecondary,
                 fontWeight: FontWeight.w600,
               ),

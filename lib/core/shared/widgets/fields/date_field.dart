@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie_vault/core/shared/widgets/custom_text_form_field.dart';
-import 'package:movie_vault/core/themes/theme_extensions.dart';
+import 'package:movie_vault/core/extensions/context_theme_extension.dart';
 import 'package:movie_vault/core/utils/date_formatter.dart';
 
 /// Campo de fecha reutilizable con selector visual.

@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:movie_vault/core/config/app_config.dart';
 import 'package:movie_vault/core/shared/widgets/images/cached_remote_image.dart';
 import 'package:movie_vault/core/shared/widgets/loaders/app_loader.dart';
-import 'package:movie_vault/core/themes/theme_extensions.dart';
+import 'package:movie_vault/core/extensions/context_theme_extension.dart';
 import 'package:movie_vault/features/movies/domain/entities/cast_member.dart';
 import 'package:movie_vault/features/movies/domain/entities/movie.dart';
 import 'package:movie_vault/features/movies/domain/entities/movie_detail.dart';

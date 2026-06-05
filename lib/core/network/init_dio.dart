@@ -7,6 +7,12 @@ import 'package:movie_vault/core/logger/logger.dart';
 import 'package:movie_vault/core/network/interceptors/network_headers_interceptor.dart';
 import 'package:movie_vault/core/network/interceptors/tmdb_auth_interceptor.dart';
 
+/// Creates the configured Dio instance used by [DioApiClient].
+///
+/// The interceptor order is deliberate:
+/// 1. default headers;
+/// 2. TMDB authentication;
+/// 3. logging of the final request/response.
 Dio buildDio({required AppLogger logger}) {
   return Dio(
       BaseOptions(

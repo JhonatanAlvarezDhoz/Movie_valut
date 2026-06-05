@@ -5,18 +5,17 @@ import 'package:movie_vault/core/constants/keys/network_header_keys.dart';
 import 'package:movie_vault/core/logger/logger.dart';
 import 'package:movie_vault/core/storage/services/session_storage_service.dart';
 
-/// Interceptor responsable de autenticación HTTP.
+/// HTTP authentication interceptor.
 ///
-/// Responsabilidades:
-/// - Agregar `Authorization: Bearer <accessToken>` a requests protegidas.
-/// - Detectar respuestas `401 Unauthorized`.
-/// - Renovar la sesión con `POST auth/refresh` usando el refresh token.
-/// - Reintentar UNA vez la request original con el nuevo access token.
-/// - Limpiar sesión si el refresh token ya no sirve.
+/// Responsibilities:
+/// - Adds `Authorization: Bearer <accessToken>` to protected requests.
+/// - Detects `401 Unauthorized` responses.
+/// - Refreshes the session through `POST auth/refresh`.
+/// - Retries the original request once with the new access token.
+/// - Clears session data when refresh is no longer possible.
 ///
-/// Importante: esto vive separado de `NetworkHeadersInterceptor` porque ETags,
-/// content-type y autenticación son responsabilidades distintas. Mezclarlas
-/// haría que la capa de red sea más difícil de mantener y testear.
+/// This stays separate from `NetworkHeadersInterceptor` because headers, cache
+/// metadata and authentication are different responsibilities.
 class AuthInterceptor extends Interceptor {
   static const _refreshPath = 'auth/refresh';
 
@@ -24,12 +23,10 @@ class AuthInterceptor extends Interceptor {
   final SessionStorageService _sessionStorageService;
   final AppLogger _logger;
 
-  /// Guarda el refresh en curso para evitar disparar múltiples refresh token
-  /// si varias requests protegidas fallan con 401 al mismo tiempo.
+  /// In-flight refresh request shared by concurrent 401 failures.
   ///
-  /// Sin esto, 5 requests vencidas podrían enviar 5 refresh simultáneos.
-  /// Eso es ruido para el backend y puede invalidar tokens dependiendo de la
-  /// estrategia de rotación.
+  /// Without this, several expired requests could trigger several refresh calls
+  /// at the same time, creating backend noise and token rotation problems.
   Future<_RefreshResult?>? _refreshInFlight;
 
   AuthInterceptor(this._dio, this._sessionStorageService, this._logger);
@@ -62,8 +59,8 @@ class AuthInterceptor extends Interceptor {
     final statusCode = err.response?.statusCode;
     final requestOptions = err.requestOptions;
 
-    // Solo el 401 intenta refresh. Un 400 de login, por ejemplo, debe llegar
-    // al repositorio para mostrar "Invalid email or password" correctamente.
+    // Only 401 can trigger refresh. A login 400 must reach the repository so
+    // the UI can show the correct invalid-credentials message.
     if (statusCode != HttpStatus.unauthorized ||
         _shouldSkipRefresh(requestOptions)) {
       handler.next(err);
@@ -82,16 +79,15 @@ class AuthInterceptor extends Interceptor {
       requestOptions.headers[NetworkHeaderKeys.authorization] =
           '${NetworkHeaderKeys.bearerPrefix} ${refreshResult.accessToken}';
 
-      // Marcamos el retry para que, si vuelve a fallar con 401, NO intente
-      // refrescar otra vez y crear un loop infinito.
+      // Mark the retry so a second 401 cannot start an infinite refresh loop.
       requestOptions.extra[NetworkRequestKeys.skipAuthRefresh] = true;
 
       final retryResponse = await _dio.fetch<dynamic>(requestOptions);
       handler.resolve(retryResponse);
     } catch (refreshError, stackTrace) {
-      _logger.warning('No fue posible refrescar la sesión.');
+      _logger.warning('Session refresh was not possible.');
       _logger.error(
-        'Refresh token falló.',
+        'Refresh token failed.',
         error: refreshError,
         stackTrace: stackTrace,
       );
@@ -108,8 +104,8 @@ class AuthInterceptor extends Interceptor {
 
     final path = _normalizePath(options.path);
 
-    // Login, registro y refresh no necesitan access token. Esto evita mandar
-    // credenciales viejas a endpoints públicos/de sesión.
+    // Login, register and refresh do not need an access token. This prevents
+    // stale credentials from being sent to public/session endpoints.
     return path == 'auth/login' ||
         path == 'auth/register' ||
         path == _refreshPath;
@@ -148,8 +144,8 @@ class AuthInterceptor extends Interceptor {
       _refreshPath,
       data: {'refreshToken': refreshToken},
       options: Options(
-        // Estos flags son internos: evitan que el request de refresh se
-        // autentique con un access token vencido y evitan loops si falla.
+        // Internal flags: keep refresh unauthenticated and prevent retry loops
+        // if refresh itself fails.
         extra: const {
           NetworkRequestKeys.skipAuth: true,
           NetworkRequestKeys.skipAuthRefresh: true,
@@ -209,11 +205,10 @@ class AuthInterceptor extends Interceptor {
   }
 }
 
-/// Resultado mínimo que necesita la capa de red para persistir la nueva sesión.
+/// Minimal refresh payload needed by the network layer to persist a session.
 ///
-/// No usamos modelos del feature `auth` acá para evitar que `core/network`
-/// dependa de `features/auth`. Esa separación importa: core debe ser base,
-/// no conocer features concretos.
+/// Auth feature models are intentionally not used here: `core/network` must not
+/// depend on concrete feature packages.
 class _RefreshResult {
   final String accessToken;
   final String refreshToken;
