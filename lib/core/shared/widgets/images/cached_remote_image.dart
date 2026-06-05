@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_vault/core/shared/widgets/loaders/app_loader.dart';
 
 /// Wrapper único para imágenes remotas cacheadas.
 ///
@@ -24,7 +25,6 @@ class CachedRemoteImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final radius = borderRadius ?? BorderRadius.circular(16);
     final hasUrl = imageUrl.trim().isNotEmpty;
 
@@ -40,12 +40,7 @@ class CachedRemoteImage extends StatelessWidget {
         placeholder: (context, url) => SizedBox(
           width: width,
           height: height,
-          child: Center(
-            child: CircularProgressIndicator(
-              strokeWidth: 2,
-              color: theme.colorScheme.primary,
-            ),
-          ),
+          child: const Center(child: AppLoader(size: 22, strokeWidth: 2)),
         ),
         errorWidget: (context, url, error) =>
             _ImageFallback(width: width, height: height),

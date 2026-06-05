@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_vault/core/router/app_routes.dart';
+import 'package:movie_vault/core/shared/widgets/feedback/app_error_view.dart';
+import 'package:movie_vault/core/shared/widgets/loaders/app_loader.dart';
+import 'package:movie_vault/core/shared/widgets/loaders/app_loading_view.dart';
 import 'package:movie_vault/features/movies/presentation/controllers/movies_controller.dart';
 import 'package:movie_vault/features/movies/presentation/widgets/movie_card.dart';
 import 'package:movie_vault/features/movies/presentation/widgets/movie_category_selector.dart';
@@ -81,7 +84,9 @@ class _MoviesHomePageState extends State<MoviesHomePage> {
                   child: Builder(
                     builder: (context) {
                       if (isLoading && movies.isEmpty) {
-                        return const Center(child: CircularProgressIndicator());
+                        return const AppLoadingView(
+                          message: 'Cargando películas...',
+                        );
                       }
 
                       if (error != null && movies.isEmpty) {
@@ -89,21 +94,10 @@ class _MoviesHomePageState extends State<MoviesHomePage> {
                           physics: const AlwaysScrollableScrollPhysics(),
                           children: [
                             const SizedBox(height: 120),
-                            Icon(
-                              Icons.cloud_off_rounded,
-                              size: 56,
-                              color: Theme.of(context).colorScheme.error,
-                            ),
-                            const SizedBox(height: 16),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 24,
-                              ),
-                              child: Text(
-                                error,
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context).textTheme.bodyLarge,
-                              ),
+                            AppErrorView(
+                              message: error,
+                              icon: Icons.cloud_off_rounded,
+                              onRetry: _controller.refreshCurrentCategory,
                             ),
                           ],
                         );
@@ -122,10 +116,19 @@ class _MoviesHomePageState extends State<MoviesHomePage> {
                         itemBuilder: (context, index) {
                           if (index == movies.length) {
                             if (isLoadingMore) {
-                              return const _PaginationLoader();
+                              return const _PaginationFooter(
+                                child: AppLoader(size: 24),
+                              );
                             }
 
-                            return _PaginationError(message: error);
+                            return _PaginationFooter(
+                              child: AppErrorView(
+                                message:
+                                    error ??
+                                    'No se pudieron cargar más películas.',
+                                compact: true,
+                              ),
+                            );
                           }
 
                           return MovieCard(movie: movies[index]);
@@ -148,34 +151,16 @@ class _MoviesHomePageState extends State<MoviesHomePage> {
   }
 }
 
-class _PaginationLoader extends StatelessWidget {
-  const _PaginationLoader();
+class _PaginationFooter extends StatelessWidget {
+  const _PaginationFooter({required this.child});
 
-  @override
-  Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(vertical: 16),
-      child: Center(child: CircularProgressIndicator()),
-    );
-  }
-}
-
-class _PaginationError extends StatelessWidget {
-  const _PaginationError({required this.message});
-
-  final String? message;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
-      child: Text(
-        message ?? 'No se pudieron cargar más películas.',
-        textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-          color: Theme.of(context).colorScheme.error,
-        ),
-      ),
+      child: Center(child: child),
     );
   }
 }

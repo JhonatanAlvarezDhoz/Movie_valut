@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:movie_vault/core/shared/widgets/loaders/app_loader.dart';
 import 'package:movie_vault/features/auth/presentation/controllers/auth_controller.dart';
 
 class SplashPage extends StatefulWidget {
@@ -31,7 +32,7 @@ class _SplashPageState extends State<SplashPage> {
             SizedBox(height: 16),
             Text('Movie Vault'),
             SizedBox(height: 24),
-            CircularProgressIndicator(),
+            AppLoader(),
           ],
         ),
       ),

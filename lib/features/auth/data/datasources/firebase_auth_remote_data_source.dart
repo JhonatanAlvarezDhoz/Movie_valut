@@ -41,7 +41,13 @@ class FirebaseAuthRemoteDataSource {
   }
 
   Future<void> logout() async {
-    await _firebaseAuth.signOut();
+    try {
+      await _firebaseAuth.signOut();
+    } on FirebaseAuthException catch (error) {
+      throw _mapFirebaseAuthException(error);
+    } catch (_) {
+      throw ServerException('No fue posible cerrar sesión.');
+    }
   }
 
   AuthSessionModel? currentSession() {

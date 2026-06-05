@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:movie_vault/core/shared/pages/auth_base_page.dart';
+import 'package:movie_vault/core/shared/widgets/button/app_button.dart';
 import 'package:movie_vault/core/shared/widgets/custom_text_form_field.dart';
+import 'package:movie_vault/core/shared/widgets/feedback/app_error_view.dart';
 import 'package:movie_vault/core/shared/widgets/fields/password_field.dart';
 import 'package:movie_vault/core/utils/app_validators.dart';
 import 'package:movie_vault/features/auth/presentation/controllers/auth_controller.dart';
@@ -89,22 +91,13 @@ class _RegisterPageState extends State<RegisterPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     if (error != null) ...[
-                      Text(
-                        error,
-                        style: TextStyle(
-                          color: Theme.of(context).colorScheme.error,
-                        ),
-                      ),
+                      AppErrorView(message: error, compact: true),
                       const SizedBox(height: 12),
                     ],
-                    FilledButton(
-                      onPressed: isSubmitting ? null : _submit,
-                      child: isSubmitting
-                          ? const SizedBox.square(
-                              dimension: 18,
-                              child: CircularProgressIndicator(strokeWidth: 2),
-                            )
-                          : const Text('Registrarme'),
+                    AppButton(
+                      label: 'Registrarme',
+                      isLoading: isSubmitting,
+                      onPressed: _submit,
                     ),
                   ],
                 );
