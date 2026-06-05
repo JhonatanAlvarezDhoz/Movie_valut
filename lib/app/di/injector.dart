@@ -31,6 +31,7 @@ import 'package:movie_vault/core/storage/services/app_storage_service.dart';
 import 'package:movie_vault/core/storage/services/preferences_storage_service.dart';
 import 'package:movie_vault/core/storage/services/secure_storage_service.dart';
 import 'package:movie_vault/core/storage/services/session_storage_service.dart';
+import 'package:movie_vault/core/themes/theme_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final serviceLocator = GetIt.instance;
@@ -53,6 +54,9 @@ Future<void> initDependencies() async {
         serviceLocator<KeyValueStorage>(),
         serviceLocator<ObjectSerializer>(),
       ),
+    )
+    ..registerLazySingleton<ThemeController>(
+      () => ThemeController(serviceLocator<AppStorageService>()),
     )
     ..registerLazySingleton<SecureKeyValueStorage>(
       () => const SecureStorageService(FlutterSecureStorage()),

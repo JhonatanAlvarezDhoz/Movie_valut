@@ -31,6 +31,6 @@ extension AppThemeModeX on AppThemeMode {
 AppThemeMode appThemeModeFromStorage(String? value) {
   return AppThemeMode.values.firstWhere(
     (mode) => mode.name == value,
-    orElse: () => AppThemeMode.system,
+    orElse: () => AppThemeMode.light,
   );
 }

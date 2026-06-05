@@ -52,11 +52,6 @@ class _MoviesHomePageState extends State<MoviesHomePage> {
         title: const Text('Movie Vault'),
         actions: [
           IconButton(
-            tooltip: 'Cuenta',
-            onPressed: () => Get.toNamed(AppRoutes.account),
-            icon: const Icon(Icons.person_outline),
-          ),
-          IconButton(
             tooltip: 'Ajustes',
             onPressed: () => Get.toNamed(AppRoutes.settings),
             icon: const Icon(Icons.settings_outlined),

@@ -49,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
     return AuthBasePage(
       children: [
         Text(
-          'Ingresá a Movie Vault',
+          'Ingresa a Movie Vault',
           style: Theme.of(context).textTheme.titleLarge,
         ),
         const SizedBox(height: 8),

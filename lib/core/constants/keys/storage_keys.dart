@@ -6,4 +6,5 @@ abstract final class StorageKeys {
   static const sessionExpiresAt = 'session.expires_at';
 
   static const moviesLastFetchAt = 'movies.last_fetch_at';
+  static const themeMode = 'settings.theme_mode';
 }
