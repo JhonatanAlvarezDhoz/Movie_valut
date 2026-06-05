@@ -19,4 +19,17 @@ abstract final class AppConfig {
       dotenv.get('ImageBaseUpdateSizeUrlTMDB', fallback: '');
 
   static const moviesRefreshInterval = Duration(hours: 12);
+
+  static String tmdbImageUrl(String? path, {bool original = false}) {
+    final normalizedPath = path?.trim() ?? '';
+    if (normalizedPath.isEmpty) return '';
+
+    final baseUrl = original ? tmdbImageOriginalBaseUrl : tmdbImageSizedBaseUrl;
+    if (baseUrl.isEmpty) return '';
+
+    final separator = baseUrl.endsWith('/') || normalizedPath.startsWith('/')
+        ? ''
+        : '/';
+    return '$baseUrl$separator$normalizedPath';
+  }
 }

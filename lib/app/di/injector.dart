@@ -10,6 +10,14 @@ import 'package:movie_vault/features/auth/domain/usecases/logout_user_use_case.d
 import 'package:movie_vault/features/auth/domain/usecases/register_user_use_case.dart';
 import 'package:movie_vault/features/auth/presentation/controllers/auth_controller.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:movie_vault/core/database/cache_refresh_policy.dart';
+import 'package:movie_vault/features/movies/data/datasources/movies_local_data_source.dart';
+import 'package:movie_vault/features/movies/data/datasources/movies_remote_data_source.dart';
+import 'package:movie_vault/features/movies/data/repositories/movies_repository_impl.dart';
+import 'package:movie_vault/features/movies/domain/repositories/movies_repository.dart';
+import 'package:movie_vault/features/movies/domain/usecases/get_movie_detail_use_case.dart';
+import 'package:movie_vault/features/movies/domain/usecases/get_movies_use_case.dart';
+import 'package:movie_vault/features/movies/presentation/controllers/movies_controller.dart';
 import 'package:get_it/get_it.dart';
 import 'package:movie_vault/core/logger/logger.dart';
 import 'package:movie_vault/core/network/api_client.dart';
@@ -89,6 +97,30 @@ Future<void> initDependencies() async {
         registerUserUseCase: serviceLocator<RegisterUserUseCase>(),
         logoutUserUseCase: serviceLocator<LogoutUserUseCase>(),
         getCurrentSessionUseCase: serviceLocator<GetCurrentSessionUseCase>(),
+      ),
+    )
+    ..registerLazySingleton<CacheRefreshPolicy>(CacheRefreshPolicy.new)
+    ..registerLazySingleton<MoviesRemoteDataSource>(
+      () => MoviesRemoteDataSource(serviceLocator<ApiClient>()),
+    )
+    ..registerLazySingleton<MoviesLocalDataSource>(MoviesLocalDataSource.new)
+    ..registerLazySingleton<MoviesRepository>(
+      () => MoviesRepositoryImpl(
+        remoteDataSource: serviceLocator<MoviesRemoteDataSource>(),
+        localDataSource: serviceLocator<MoviesLocalDataSource>(),
+        cacheRefreshPolicy: serviceLocator<CacheRefreshPolicy>(),
+      ),
+    )
+    ..registerLazySingleton<GetMoviesUseCase>(
+      () => GetMoviesUseCase(serviceLocator<MoviesRepository>()),
+    )
+    ..registerLazySingleton<GetMovieDetailUseCase>(
+      () => GetMovieDetailUseCase(serviceLocator<MoviesRepository>()),
+    )
+    ..registerFactory<MoviesController>(
+      () => MoviesController(
+        getMoviesUseCase: serviceLocator<GetMoviesUseCase>(),
+        getMovieDetailUseCase: serviceLocator<GetMovieDetailUseCase>(),
       ),
     );
 }
