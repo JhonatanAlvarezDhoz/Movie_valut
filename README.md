@@ -96,7 +96,7 @@ lib/
   features/
     auth/              # Firebase Auth + sesión local
     movies/            # TMDB + cache Hive + detalle + paginación
-    settings/          # Logout/configuración simple
+    settings/          # Cuenta, logout y preferencias de apariencia
     splash/            # Resolución inicial de sesión
     user/              # Cuenta actual
 ```
@@ -146,6 +146,13 @@ ImageBaseUpdateSizeUrlTMDB=
 - Deduplicación por `movie.id`.
 - Detalle con poster Hero, backdrop, descripción, géneros y elenco.
 
+### Settings
+
+- Visualización de la cuenta autenticada.
+- Cierre de sesión.
+- Cambio entre modo claro y oscuro desde Ajustes.
+- Persistencia local de la preferencia de tema.
+
 ### UI compartida
 
 - `AppButton`
@@ -155,7 +162,8 @@ ImageBaseUpdateSizeUrlTMDB=
 - `CachedRemoteImage`
 - `CustomTextFormField`
 - `PasswordField`
-- `ResponsivePageContainer`
+- `AuthBackground`
+- `GlassCard`
 
 ## Comandos de validación
 
