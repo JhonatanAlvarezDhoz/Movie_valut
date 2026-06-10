@@ -19,4 +19,7 @@ abstract interface class AuthRepository {
 
   /// Returns the current session if Firebase or local storage knows one.
   Future<AuthSession?> currentSession();
+
+  /// Sends the password recovery email for an existing Firebase user.
+  Future<void> resetPassword(String email);
 }

@@ -8,6 +8,7 @@ import 'package:movie_vault/features/auth/domain/usecases/get_current_session_us
 import 'package:movie_vault/features/auth/domain/usecases/login_user_use_case.dart';
 import 'package:movie_vault/features/auth/domain/usecases/logout_user_use_case.dart';
 import 'package:movie_vault/features/auth/domain/usecases/register_user_use_case.dart';
+import 'package:movie_vault/features/auth/domain/usecases/reset_password_use_case.dart';
 
 void main() {
   const session = AuthSession(userId: 'user-1', email: 'user@test.com');
@@ -64,6 +65,28 @@ void main() {
       expect((result as ResultSuccess<AuthSession?>).value, session);
     },
   );
+
+  test('ResetPasswordUseCase returns ResultSuccess<void>', () async {
+    final useCase = ResetPasswordUseCase(_FakeAuthRepository());
+
+    final result = await useCase(session.email);
+
+    expect(result, isA<ResultSuccess<void>>());
+  });
+
+  test(
+    'ResetPasswordUseCase maps repository exceptions to ResultFailure',
+    () async {
+      final useCase = ResetPasswordUseCase(
+        _FakeAuthRepository(resetPasswordError: NetworkException()),
+      );
+
+      final result = await useCase(session.email);
+
+      expect(result, isA<ResultFailure<void>>());
+      expect((result as ResultFailure<void>).failure, isA<NetworkFailure>());
+    },
+  );
 }
 
 class _FakeAuthRepository implements AuthRepository {
@@ -71,11 +94,13 @@ class _FakeAuthRepository implements AuthRepository {
     this.loginSession,
     this.currentSessionValue,
     this.registerError,
+    this.resetPasswordError,
   });
 
   final AuthSession? loginSession;
   final AuthSession? currentSessionValue;
   final Exception? registerError;
+  final Exception? resetPasswordError;
 
   @override
   Future<AuthSession> login({
@@ -101,5 +126,11 @@ class _FakeAuthRepository implements AuthRepository {
   @override
   Future<AuthSession?> currentSession() async {
     return currentSessionValue;
+  }
+
+  @override
+  Future<void> resetPassword(String email) async {
+    final error = resetPasswordError;
+    if (error != null) throw error;
   }
 }

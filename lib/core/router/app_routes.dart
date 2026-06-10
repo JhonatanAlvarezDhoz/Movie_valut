@@ -9,4 +9,5 @@ abstract final class AppRoutes {
   static const movieDetail = '/movies/:movieId';
   static const settings = '/settings';
   static const account = '/account';
+  static const resetPassword = '/resetPassword';
 }

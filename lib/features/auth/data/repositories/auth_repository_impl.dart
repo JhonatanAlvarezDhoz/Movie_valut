@@ -59,4 +59,9 @@ class AuthRepositoryImpl implements AuthRepository {
 
     return _localDataSource.readSession();
   }
+
+  @override
+  Future<void> resetPassword(String email) async {
+    await _remoteDataSource.resetPassword(email);
+  }
 }

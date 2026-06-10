@@ -8,8 +8,8 @@ import 'package:movie_vault/features/auth/domain/usecases/get_current_session_us
 import 'package:movie_vault/features/auth/domain/usecases/login_user_use_case.dart';
 import 'package:movie_vault/features/auth/domain/usecases/logout_user_use_case.dart';
 import 'package:movie_vault/features/auth/domain/usecases/register_user_use_case.dart';
+import 'package:movie_vault/features/auth/domain/usecases/reset_password_use_case.dart';
 import 'package:movie_vault/features/auth/presentation/controllers/auth_controller.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:movie_vault/core/database/cache_refresh_policy.dart';
 import 'package:movie_vault/features/movies/data/datasources/movies_local_data_source.dart';
 import 'package:movie_vault/features/movies/data/datasources/movies_remote_data_source.dart';
@@ -25,12 +25,9 @@ import 'package:movie_vault/core/network/dio_api_client.dart';
 import 'package:movie_vault/core/network/init_dio.dart';
 import 'package:movie_vault/core/storage/contracts/key_value_storage.dart';
 import 'package:movie_vault/core/storage/contracts/object_serializer.dart';
-import 'package:movie_vault/core/storage/contracts/secure_key_value_storage.dart';
 import 'package:movie_vault/core/storage/serializers/json_serializer.dart';
 import 'package:movie_vault/core/storage/services/app_storage_service.dart';
 import 'package:movie_vault/core/storage/services/preferences_storage_service.dart';
-import 'package:movie_vault/core/storage/services/secure_storage_service.dart';
-import 'package:movie_vault/core/storage/services/session_storage_service.dart';
 import 'package:movie_vault/core/themes/theme_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -70,12 +67,6 @@ Future<void> initDependencies() async {
     ..registerLazySingleton<ThemeController>(
       () => ThemeController(serviceLocator<AppStorageService>()),
     )
-    ..registerLazySingleton<SecureKeyValueStorage>(
-      () => const SecureStorageService(FlutterSecureStorage()),
-    )
-    ..registerLazySingleton<SessionStorageService>(
-      () => SessionStorageService(serviceLocator<SecureKeyValueStorage>()),
-    )
     ..registerLazySingleton<Dio>(
       () => buildDio(logger: serviceLocator<AppLogger>()),
     )
@@ -107,12 +98,16 @@ Future<void> initDependencies() async {
     ..registerLazySingleton<GetCurrentSessionUseCase>(
       () => GetCurrentSessionUseCase(serviceLocator<AuthRepository>()),
     )
+    ..registerLazySingleton<ResetPasswordUseCase>(
+      () => ResetPasswordUseCase(serviceLocator<AuthRepository>()),
+    )
     ..registerFactory<AuthController>(
       () => AuthController(
         loginUserUseCase: serviceLocator<LoginUserUseCase>(),
         registerUserUseCase: serviceLocator<RegisterUserUseCase>(),
         logoutUserUseCase: serviceLocator<LogoutUserUseCase>(),
         getCurrentSessionUseCase: serviceLocator<GetCurrentSessionUseCase>(),
+        resetPasswordUseCase: serviceLocator<ResetPasswordUseCase>(),
       ),
     )
     ..registerLazySingleton<CacheRefreshPolicy>(CacheRefreshPolicy.new)

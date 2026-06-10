@@ -61,6 +61,16 @@ class FirebaseAuthRemoteDataSource {
     return AuthSessionModel.fromFirebase(userId: user.uid, email: email);
   }
 
+  Future<void> resetPassword(String email) async {
+    try {
+      await _firebaseAuth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (error) {
+      throw _mapFirebaseAuthException(error);
+    } catch (_) {
+      throw ServerException('No fue posible enviar el correo de recuperación.');
+    }
+  }
+
   AuthSessionModel _sessionFromCredential(UserCredential credential) {
     final user = credential.user;
     final email = user?.email;
